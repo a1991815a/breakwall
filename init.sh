@@ -17,13 +17,15 @@ function read_pwd()
     if [ -z "$read_val" ]; then
     	read_val="88888888"
 	fi
+	
+	echo -e "\n"
     return $read_val
 }
 
 function check_install()
 {
-	which $1 || return ""
-	return "$2 "
+	which $1 || echo ""
+	echo "$2 "
 }
 
 #read custom setting from user input
@@ -37,15 +39,15 @@ supervisord_passwd=$(read_pwd "supervisord_passwd")
 
 #check and install base package and util
 install_package=$(check_install git git)
-install_package=$(check_install httpd httpd)
-install_package=$(check_install firewalld firewalld)
-install_package=$(check_install wget wget)
-install_package=$(check_install openssl openssl)
-install_package=$(check_install python python)
-install_package=$(check_install tar tar)
-install_package=$(check_install bzip2 bzip2)
-install_package=$(check_install gzip gzip)
-install_package=$(check_install easy_install python-setuptools)
+install_package+=$(check_install httpd httpd)
+install_package+=$(check_install firewalld firewalld)
+install_package+=$(check_install wget wget)
+install_package+=$(check_install openssl openssl)
+install_package+=$(check_install python python)
+install_package+=$(check_install tar tar)
+install_package+=$(check_install bzip2 bzip2)
+install_package+=$(check_install gzip gzip)
+install_package+=$(check_install easy_install python-setuptools)
 
 yum update -y || exit 1
 
