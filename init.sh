@@ -1,5 +1,5 @@
 #! /bin/sh
-stty -echo
+#stty -echo
 
 #function define
 function read_default()
