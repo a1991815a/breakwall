@@ -45,16 +45,16 @@ echo -e "\n"
 
 #check and install base package and util
 install_package=""
-$(check_install git git)
-$(check_install httpd httpd)
-$(check_install firewalld firewalld)
-$(check_install wget wget)
-$(check_install openssl openssl)
-$(check_install python python)
-$(check_install tar tar)
-$(check_install bzip2 bzip2)
-$(check_install gzip gzip)
-$(check_install easy_install python-setuptools)
+check_install git git
+check_install httpd httpd
+check_install firewalld firewalld
+check_install wget wget
+check_install openssl openssl
+check_install python python
+check_install tar tar
+check_install bzip2 bzip2
+check_install gzip gzip
+check_install easy_install python-setuptools
 
 yum update -y || exit 1
 
@@ -63,7 +63,7 @@ if [ -n "$install_package" ]; then
 fi
 
 which pip || easy_install pip || exit 1
-which ssserver || pip install git+https://github.com/shadowsocks/shadowsocks.git@master || exit 1
+which ssserver || pip install "git+https://github.com/shadowsocks/shadowsocks.git@master" || exit 1
 which supervisord || pip install supervisor || exit 1
 
 #kcptun bin update or install
