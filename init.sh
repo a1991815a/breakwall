@@ -1,4 +1,13 @@
 #! /bin/sh
+function read_default()
+{
+    read -p "$1[default: $2]" read_val
+    if [ -z "$read_val" ]; then
+        read_val=$2
+    fi
+    return $read_val
+}
+
 yum update -y
 yum install -y vim git httpd firewalld wget openssl python tar bzip2 gzip
 yum install -y python-setuptools && easy_install pip
@@ -22,8 +31,15 @@ shadowsocks_bin=$(which ssserver || (echo "ssserver install failure..."; exit 1)
 kcptun_bin=$(which kcptun || (echo "kcptun install failure..."; exit 1))
 supervisord_bin=$(which supervisord && which echo_supervisord_conf || (echo "supervisord install failure..."; exit 1))
 
+shadowsocks_port=$(read_default "shadowsocks_port" 8388)
+shadowsocks_localport=$(read_default "shadowsocks_localport" 1080)
+shadowsocks_localport=$(read_default "shadowsocks_localport" 1080)
+shadowsocks_localport=$(read_default "kcptun_port" 29900)
+shadowsocks_localport=$(read_default "kcptun_pwd" 123123)
+
 wget -O- https://raw.githubusercontent.com/a1991815a/breakwall/master/kcptun.json > /etc/kcptun.json
 wget -O- https://raw.githubusercontent.com/a1991815a/breakwall/master/shadowsocks.json > /etc/shadowsocks.json
+
 
 read -p "supervisord control username: " username
 read -p "supervisord control password: " -s password
@@ -80,3 +96,5 @@ echo $(cat /etc/supervisord.conf | sed -n "$after_line,\$p") >/etc/supervisord.c
 
 echo $supervisord_script >>/etc/supervisord.conf
 
+firewall-cmd --new-service=shadowsocks --permanent
+firewall-cmd --service=shadowsocks --add-port= --permanent

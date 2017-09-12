@@ -1,9 +1,9 @@
 {
     "server":"0.0.0.0",
-    "server_port":8388,
+    "server_port":%shadowsocks_port%,
     "local_address": "127.0.0.1",
-    "local_port":1080,
-    "password":"shadowsocks0731,.",
+    "local_port":%shadowsocks_localport%,
+    "password":"%shadowsocks_pwd%",
     "timeout":300,
     "method":"rc-md5",
     "fast_open": false,

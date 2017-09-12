@@ -1,7 +1,7 @@
 {
-"listen": ":29900",
-"target": "127.0.0.1:8388",
-"key": "kcptun0731,.",
+"listen": ":%kcptun_port%",
+"target": "127.0.0.1:%shadowsocks_port%",
+"key": "%kcptun_pwd%",
 "crypt": "salsa20",
 "mode": "fast2",
 "mtu": 1350,
