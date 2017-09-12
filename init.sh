@@ -8,7 +8,8 @@ function read_default()
     if [ -z "$read_val" ]; then
         read_val=$2
     fi
-    return $read_val
+	
+    echo "$read_val"
 }
 
 function read_pwd()
@@ -18,36 +19,42 @@ function read_pwd()
     	read_val="88888888"
 	fi
 	
-	echo -e "\n"
-    return $read_val
+    echo "$read_val"
 }
 
 function check_install()
 {
-	which $1 || echo ""
-	echo "$2 "
+	which $1 || install_package+="$1 "
 }
 
 #read custom setting from user input
 shadowsocks_port=$(read_default "shadowsocks_port" 8388)
+echo -e "\n"
 shadowsocks_localport=$(read_default "shadowsocks_localport" 1080)
+echo -e "\n"
 shadowsocks_pwd=$(read_pwd "shadowsocks_pwd")
+echo -e "\n"
 kcptun_port=$(read_default "kcptun_port" 29900)
+echo -e "\n"
 kcptun_pwd=$(read_pwd "kcptun_pwd")
+echo -e "\n"
 supervisord_username=$(read_default "supervisord_username" "myuser")
+echo -e "\n"
 supervisord_passwd=$(read_pwd "supervisord_passwd")
+echo -e "\n"
 
 #check and install base package and util
-install_package=$(check_install git git)
-install_package+=$(check_install httpd httpd)
-install_package+=$(check_install firewalld firewalld)
-install_package+=$(check_install wget wget)
-install_package+=$(check_install openssl openssl)
-install_package+=$(check_install python python)
-install_package+=$(check_install tar tar)
-install_package+=$(check_install bzip2 bzip2)
-install_package+=$(check_install gzip gzip)
-install_package+=$(check_install easy_install python-setuptools)
+install_package=""
+$(check_install git git)
+$(check_install httpd httpd)
+$(check_install firewalld firewalld)
+$(check_install wget wget)
+$(check_install openssl openssl)
+$(check_install python python)
+$(check_install tar tar)
+$(check_install bzip2 bzip2)
+$(check_install gzip gzip)
+$(check_install easy_install python-setuptools)
 
 yum update -y || exit 1
 
