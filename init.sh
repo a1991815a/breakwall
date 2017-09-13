@@ -91,7 +91,7 @@ supervisord_script=$(wget -O- https://raw.githubusercontent.com/a1991815a/breakw
 
 echo "$supervisord_script" >/etc/supervisord.conf
 
-if [ -n "$(cat /etc/rc.local | grep supervisord)" ]; then
+if [ -z "$(cat /etc/rc.local | grep supervisord)" ]; then
 	echo "supervisord -c /etc/supervisord.conf" >> /etc/rc.local
 fi
 
