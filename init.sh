@@ -26,7 +26,7 @@ function read_pwd()
 
 function check_install()
 {
-	which $1 || install_package+="$1 "
+	which $1 || install_package+="$2 "
 }
 
 #read custom setting from user input
