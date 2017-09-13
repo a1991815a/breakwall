@@ -87,7 +87,7 @@ supervisord_bin=$((which supervisord && which echo_supervisord_conf) || (echo "s
 (wget -O- https://raw.githubusercontent.com/a1991815a/breakwall/master/shadowsocks.json | sed "s/%shadowsocks_port%/$shadowsocks_port/g" | sed "s/%shadowsocks_localport%/$shadowsocks_localport/g" | sed "s/%shadowsocks_pwd%/$shadowsocks_pwd/g") > /etc/shadowsocks.json
 
 #supervisord config
-(wget -O- https://raw.githubusercontent.com/a1991815a/breakwall/master/supervisord.conf | sed "s/%username%/$supervisord_username/g" | sed "s/%password%/$supervisord_passwd/g" | sed "s/%shadowsocks_bin%/$shadowsocks_bin/g" | sed "s/%kcptun_bin%/$kcptun_bin/g") >/etc/supervisord.conf
+(wget -O- https://raw.githubusercontent.com/a1991815a/breakwall/master/supervisord.conf | sed "s/%username%/$supervisord_username/g" | sed "s/%password%/$supervisord_passwd/g" | sed "s/%shadowsocks_bin%/$shadowsocks_bin/g" | sed "s/%kcptun_bin%/$kcptun_bin/g") > /etc/supervisord.conf
 
 if [ -z "$(cat /etc/rc.local | grep supervisord)" ]; then
 	echo "supervisord -c /etc/supervisord.conf" >> /etc/rc.local
