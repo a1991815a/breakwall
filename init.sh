@@ -8,7 +8,7 @@ function read_default()
     if [ -z "$read_val" ]; then
         read_val=$2
     fi
-	
+
     echo "$read_val"
 }
 
@@ -18,7 +18,7 @@ function read_pwd()
     if [ -z "$read_val" ]; then
     	read_val="88888888"
 	fi
-	
+
     echo "$read_val"
 }
 
@@ -45,16 +45,16 @@ echo -e "\n"
 
 #check and install base package and util
 install_package=""
-check_install git git
-check_install httpd httpd
-check_install firewalld firewalld
-check_install wget wget
-check_install openssl openssl
-check_install python python
-check_install tar tar
-check_install bzip2 bzip2
-check_install gzip gzip
-check_install easy_install python-setuptools
+check_install "git" "git"
+check_install "httpd" "httpd"
+check_install "firewalld" "firewalld"
+check_install "wget" "wget"
+check_install "openssl" "openssl"
+check_install "python" "python"
+check_install "tar" "tar"
+check_install "bzip2" "bzip2"
+check_install "gzip" "gzip"
+check_install "easy_install" "python-setuptools"
 
 yum update -y || exit 1
 
