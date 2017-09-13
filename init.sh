@@ -89,7 +89,7 @@ supervisord_bin=$((which supervisord && which echo_supervisord_conf) || (echo "s
 #supervisord config
 supervisord_script=$(wget -O- https://raw.githubusercontent.com/a1991815a/breakwall/master/supervisord.conf | sed "s/%username%/$supervisord_username/g" | sed "s/%passwd%/$supervisord_passwd/g" | sed "s/%shadowsocks_bin%/$shadowsocks_bin/g" | sed "s/%kcptun_bin%/%kcptun_bin/g")
 
-echo $supervisord_script >>/etc/supervisord.conf
+echo "$supervisord_script" >/etc/supervisord.conf
 
 if [ -n "$(cat /etc/rc.local | grep supervisord)" ]; then
 	echo "supervisord -c /etc/supervisord.conf" >> /etc/rc.local
