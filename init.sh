@@ -1,6 +1,8 @@
 #! /bin/sh
 stty -echo
 
+which which || yum install -y which
+
 #function define
 function read_default()
 {
