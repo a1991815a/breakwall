@@ -95,6 +95,8 @@ if [ -n "$(cat /etc/rc.local | grep supervisord)" ]; then
 	echo "supervisord -c /etc/supervisord.conf" >> /etc/rc.local
 fi
 
+systemctl start firewalld
+
 #firewalld setting
 firewall-cmd --remove-service=shadowsocks --permanent
 firewall-cmd --remove-service=kcptun --permanent
