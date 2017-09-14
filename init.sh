@@ -69,6 +69,9 @@ which ssserver || pip install "git+https://github.com/shadowsocks/shadowsocks.gi
 which supervisord || pip install supervisor || exit 1
 
 #kcptun bin update or install
+rm -frd /usr/shadowsocks; mkdir /usr/shadowsocks
+rm -frd /usr/kcptun; mkdir /usr/kcptun
+
 rm -frd /tmp/ss-kcptun; mkdir /tmp/ss-kcptun
 pushd /tmp/ss-kcptun
 latestUrl=https://github.com$(wget -O- https://github.com/xtaci/kcptun/releases/latest | grep -P 'href=[\s\S]*kcptun-linux-amd64[\s\S]*' | cut -d'"' -f2 | cut -d'"' -f1)
